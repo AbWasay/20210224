@@ -8,6 +8,7 @@
     tools:context=".MainActivity">
 
     <RelativeLayout
+        android:id="@+id/RelativeLayout"
         android:layout_width="411dp"
         android:layout_height="736dp"
         app:layout_constraintBottom_toBottomOf="parent"
