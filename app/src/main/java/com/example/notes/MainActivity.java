@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -52,13 +53,24 @@ public class MainActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d("UFC","You Clicked");
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 builder.setCancelable(true);
                 builder.setItems(option, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Log.d("UFC","You Clicked" + which);
+                        if (which == 0) //open
+                        {
+                            Intent intent = new Intent(MainActivity.this,page.class);
+                            int id = position;
+                            intent.putExtra("id",++id);
+                            startActivity(intent);
+                        }
+                        else if (which == 1) //edit
+                        {
+                            DBHelper helper = new DBHelper(MainActivity.this);
+                            SQLiteDatabase db = helper.getWritableDatabase();
+                            helper.delete(db,position);
+                        }
                     }
                 });
                 AlertDialog alertDialog = builder.create();
@@ -68,9 +80,13 @@ public class MainActivity extends AppCompatActivity {
     }
     public void insert(View view)
     {
-        /*DBHelper helper = new DBHelper(this);
+        Intent intent = new Intent(MainActivity.this,page.class);
+        intent.putExtra("id","");
+        startActivity(intent);
+
+        DBHelper helper = new DBHelper(this);
         SQLiteDatabase db = helper.getWritableDatabase();
-        helper.insert("This is title","This is data",db);*/
+        helper.insert("This is title","This is data",db);
     }
 
 }

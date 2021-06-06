@@ -27,6 +27,11 @@ public class DBHelper extends SQLiteOpenHelper {
         db.insert("notes",null,contentValues);
     }
 
+    public void delete (SQLiteDatabase db, int id)
+    {
+
+    }
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
