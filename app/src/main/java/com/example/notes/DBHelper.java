@@ -19,7 +19,13 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(query);
     }
 
-
+    public void insert (String title, String content,SQLiteDatabase db)
+    {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("title",title);
+        contentValues.put("content",content);
+        db.insert("notes",null,contentValues);
+    }
 
 
     @Override
