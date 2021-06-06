@@ -81,12 +81,13 @@ public class MainActivity extends AppCompatActivity {
     public void insert(View view)
     {
         Intent intent = new Intent(MainActivity.this,page.class);
-        intent.putExtra("id","");
+        intent.putExtra("id",0);
         startActivity(intent);
 
+        /*
         DBHelper helper = new DBHelper(this);
         SQLiteDatabase db = helper.getWritableDatabase();
-        helper.insert("This is title","This is data",db);
+        helper.insert("This is title","This is data",db);*/
     }
 
 }
