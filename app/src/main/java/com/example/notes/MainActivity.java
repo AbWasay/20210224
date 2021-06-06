@@ -48,14 +48,21 @@ public class MainActivity extends AppCompatActivity {
             );
             listView.setAdapter(adapter);
         }
-
+        String[] option = {"Open","Delete"};
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.d("UFC","You Clicked");
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 builder.setCancelable(true);
-
+                builder.setItems(option, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Log.d("UFC","You Clicked" + which);
+                    }
+                });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
             }
         });
     }
