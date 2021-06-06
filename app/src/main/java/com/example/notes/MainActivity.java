@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
                         {
                             Intent intent = new Intent(MainActivity.this,page.class);
                             int id = position;
-                            intent.putExtra("id",++id);
+                            intent.putExtra("id",String.valueOf(++id));
                             startActivity(intent);
                         }
                         else if (which == 1) //edit
