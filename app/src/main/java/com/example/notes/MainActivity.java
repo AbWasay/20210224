@@ -84,10 +84,6 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("id",0);
         startActivity(intent);
 
-        /*
-        DBHelper helper = new DBHelper(this);
-        SQLiteDatabase db = helper.getWritableDatabase();
-        helper.insert("This is title","This is data",db);*/
     }
 
 }

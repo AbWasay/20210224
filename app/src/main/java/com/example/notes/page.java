@@ -46,5 +46,12 @@ public class page extends AppCompatActivity {
     }
 
     public void save(View view) {
+
+        textView = findViewById(R.id.textView);
+        textView2 = findViewById(R.id.textView2);
+        String title = textView.getText().toString();
+        DBHelper helper = new DBHelper(this);
+        SQLiteDatabase db = helper.getWritableDatabase();
+        helper.insert(textView.getText().toString(),textView2.getText().toString(),db);
     }
 }
