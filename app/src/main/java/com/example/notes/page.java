@@ -55,7 +55,6 @@ public class page extends AppCompatActivity {
         String id = intent.getStringExtra("id");
         if (id != null)
         {
-            Log.d("UFC","ID is not null");
             Cursor cursor = db.rawQuery("select * from notes",new String[]{});
             cursor.moveToFirst();
             for (int i=1; i < Integer.valueOf(id);i++)

@@ -65,11 +65,13 @@ public class MainActivity extends AppCompatActivity {
                             intent.putExtra("id",String.valueOf(++id));
                             startActivity(intent);
                         }
-                        else if (which == 1) //edit
+                        else if (which == 1) //delete
                         {
+                            int id = position;
+
                             DBHelper helper = new DBHelper(MainActivity.this);
-                            SQLiteDatabase db = helper.getWritableDatabase();
-                            helper.delete(db,position);
+                            helper.delete(String.valueOf(++id));
+                            startActivity(new Intent(MainActivity.this,MainActivity.class));
                         }
                     }
                 });
