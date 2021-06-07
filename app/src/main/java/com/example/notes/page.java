@@ -61,6 +61,7 @@ public class page extends AppCompatActivity {
             {
                 cursor.moveToNext();
             }
+
             id = cursor.getString(0);
         }
 
