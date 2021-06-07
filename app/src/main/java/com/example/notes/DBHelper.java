@@ -19,12 +19,21 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(query);
     }
 
-    public void insert (String title, String content,SQLiteDatabase db)
+    public void insert (SQLiteDatabase db,String title, String content,String id)
     {
+        Log.d("UFC","The clicked id is " + id);
         ContentValues contentValues = new ContentValues();
         contentValues.put("title",title);
         contentValues.put("content",content);
-        db.insert("notes",null,contentValues);
+        if (id == null)
+        {
+            db.insert("notes",null,contentValues);
+        }
+        else
+        {
+            db.update("notes",contentValues,"_id=?",new String[]{id});
+        }
+
     }
 
     public void delete (SQLiteDatabase db, int id)

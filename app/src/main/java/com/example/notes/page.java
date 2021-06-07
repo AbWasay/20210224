@@ -9,26 +9,25 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 
 public class page extends AppCompatActivity {
 
-    EditText textView,textView2;
+    EditText editText,editText2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page);
 
-        textView = findViewById(R.id.textView);
-        textView2 = findViewById(R.id.textView2);
+        editText = findViewById(R.id.editText);
+        editText2 = findViewById(R.id.editText2);
 
         Intent intent = getIntent();
         String id = intent.getStringExtra("id");
 
         if (id == null)
         {
-            textView.setHint("Title");
-            textView2.setHint("Enter Text");
+            editText.setHint("Title");
+            editText2.setHint("Enter Text");
         }
         else
         {
@@ -40,18 +39,34 @@ public class page extends AppCompatActivity {
             {
                 cursor.moveToNext();
             }
-            textView.setText(cursor.getString(1));
-            textView2.setText(cursor.getString(2));
+            editText.setText(cursor.getString(1));
+            editText2.setText(cursor.getString(2));
         }
     }
 
     public void save(View view) {
 
-        textView = findViewById(R.id.textView);
-        textView2 = findViewById(R.id.textView2);
-        String title = textView.getText().toString();
+        editText = findViewById(R.id.editText);
+        editText2 = findViewById(R.id.editText2);
         DBHelper helper = new DBHelper(this);
         SQLiteDatabase db = helper.getWritableDatabase();
-        helper.insert(textView.getText().toString(),textView2.getText().toString(),db);
+
+        Intent intent = getIntent();
+        String id = intent.getStringExtra("id");
+        if (id != null)
+        {
+            Log.d("UFC","ID is not null");
+            Cursor cursor = db.rawQuery("select * from notes",new String[]{});
+            cursor.moveToFirst();
+            for (int i=1; i < Integer.valueOf(id);i++)
+            {
+                cursor.moveToNext();
+            }
+            id = cursor.getString(0);
+        }
+
+        helper.insert(db,editText.getText().toString(),editText2.getText().toString(),id);
+
+        startActivity(new Intent(this,MainActivity.class));
     }
 }
